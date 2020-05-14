@@ -1,27 +1,19 @@
 import React from 'react'
-import { createAction } from '@reduxjs/toolkit'
 import { useSelector, useDispatch } from 'react-redux'
-
-const useCounter = () => {
-  const count = useSelector(state => state.count)
-  const dispatch = useDispatch()
-  const increment = () => dispatch(createAction('INCREMENT')())
-  const decrement = () => dispatch(createAction('DECREMENT')())
-  const reset = () => dispatch(createAction('RESET')())
-
-  return { count, increment, decrement, reset }
-}
+import { increment, decrement, reset } from '../counterSlice'
 
 const Counter = () => {
-  const { count, increment, decrement, reset } = useCounter()
+  const count = useSelector((state) => state.counter.count)
+  const dispatch = useDispatch()
+
   return (
     <div>
       <h1>
         Count: <span>{count}</span>
       </h1>
-      <button onClick={increment}>+1</button>
-      <button onClick={decrement}>-1</button>
-      <button onClick={reset}>Reset</button>
+      <button onClick={() => dispatch(increment())}>+1</button>
+      <button onClick={() => dispatch(decrement())}>-1</button>
+      <button onClick={() => dispatch(reset())}>Reset</button>
     </div>
   )
 }

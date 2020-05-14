@@ -1,18 +1,9 @@
 import React from 'react'
-import { createAction } from '@reduxjs/toolkit'
 import { connect } from 'react-redux'
 import useInterval from '../lib/useInterval'
 import Clock from '../components/clock'
 import Counter from '../components/counter'
-
-const tick = createAction('TICK', light => {
-  return {
-    payload: {
-      light: light,
-      lastUpdate: Date.now(),
-    },
-  }
-})
+import { tick } from '../clockSlice'
 
 const IndexPage = ({ dispatch }) => {
   // Use state or dispatch here
@@ -29,4 +20,4 @@ const IndexPage = ({ dispatch }) => {
   )
 }
 
-export default connect(state => state)(IndexPage)
+export default connect((state) => state)(IndexPage)
